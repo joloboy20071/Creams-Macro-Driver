@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace Creams_Macro_Protocol
 {
     struct CommandType {
@@ -13,8 +8,13 @@ namespace Creams_Macro_Protocol
         private string? CommandValue;
         private string[]? CommandData;
 
-        public string commandvalue { get{ return CommandValue; } }
-        public string[]? commanddata {get{ return CommandData; } }
+        private bool valid = false;
+
+        public string commandvalue { get{ if (valid) { return CommandValue; } return string.Empty;   } }
+        public string[]? commanddata {get{ if (valid) { return CommandData; } return null; } }
+
+        public bool ValidCommand { get { return valid; } }
+
 
         public CommandType(string Input) {
             Input = Input.Replace(" ", "");
@@ -28,12 +28,15 @@ namespace Creams_Macro_Protocol
                 var commandlist = command.ToList();
                 commandlist.RemoveAt(0);
                 CommandData = commandlist.ToArray();
-
-
+                valid = true;
+                return;
 
             
             }
-        
+            valid = false;
+            CommandData = null;
+            CommandValue = null;
+            return;
         }
 
 

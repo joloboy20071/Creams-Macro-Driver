@@ -10,13 +10,24 @@ namespace Creams_Macro_Protocol
 {
     internal static class Datahandeling
     {
-        private static void CommandValidation(string InData) {
-        
-        
+        public static void comamndStorter(CommandType command) {
+            switch (command.commandvalue) {
+                case "0X0": 
+                    volumeCommandHandeler(command); break;
+            
+            }
         
         }
 
+        
+        
+        
+        
+        private static void volumeCommandHandeler(CommandType command) {
+            // #TODO write volume Code
 
+
+        }
 
 
 
@@ -35,17 +46,18 @@ namespace Creams_Macro_Protocol
 
 
         public static void SetupDataHandeler(SerialPort port) {
-            
-            port.DataReceived += new SerialDataReceivedEventHandler(DataHandeler);    
-            
-        
+
+            port.DataReceived += new SerialDataReceivedEventHandler(DataHandeler);
         }
 
         private static void DataHandeler(object Sender, SerialDataReceivedEventArgs Eventarg) {
             SerialPort sp = (SerialPort)Sender;
             string indata = sp.ReadExisting();
 
+            CommandType posibleCommand = new CommandType(indata);
+            if (posibleCommand.ValidCommand) { comamndStorter(posibleCommand); }
 
+            
 
 
         }
