@@ -5,7 +5,7 @@ VisualStudioVersion = 17.12.35728.132
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Creams Macro Protocol", "Creams Macro Protocol\Creams Macro Protocol.csproj", "{D67C46CE-D710-46D1-A4B0-6DA229059E1B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{1CD488F0-F441-4620-AE22-0833E3B68ED9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mainruntime", "ConsoleApp1\Mainruntime.csproj", "{1CD488F0-F441-4620-AE22-0833E3B68ED9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

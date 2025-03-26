@@ -1,3 +1,11 @@
 ﻿using Creams_Macro_Protocol;
+using System.IO.Ports;
 
-Creams_Macro_Protocol.n
+
+
+SerialPort serialObject = ComHandshake.GetCompatibleDevice();
+
+
+
+
+serialObject.Close();

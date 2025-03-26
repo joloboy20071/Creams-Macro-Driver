@@ -21,8 +21,14 @@ namespace Creams_Macro_Protocol
             if (Input.Contains("100001") && Input.Contains("FFFFFF")) {
                 int start = Input.IndexOf("100001");
                 int end = Input.IndexOf("FFFFFFF");
-                Input.Substring(start, end);
-                
+                string data =Input.Substring(start, end);
+                string[] command = data.Split("____");
+                CommandValue = command[0];
+
+                var commandlist = command.ToList();
+                commandlist.RemoveAt(0);
+                CommandData = commandlist.ToArray();
+
 
 
             
