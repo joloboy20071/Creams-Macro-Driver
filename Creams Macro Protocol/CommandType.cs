@@ -3,7 +3,8 @@ namespace Creams_Macro_Protocol
 {
     struct CommandType {
 
-        
+        private string CommandPrefix = "100001";
+        private string CommandEnd = "FFFFFF";
 
         private string? CommandValue;
         private string[]? CommandData;
@@ -17,11 +18,12 @@ namespace Creams_Macro_Protocol
 
 
         public CommandType(string Input) {
-            Input = Input.Replace(" ", "");
-            if (Input.Contains("100001") && Input.Contains("FFFFFF")) {
-                int start = Input.IndexOf("100001");
-                int end = Input.IndexOf("FFFFFFF");
-                string data =Input.Substring(start, end);
+            Input = Input.Replace(" ", "").Replace("\n","");
+            if (Input.Contains(CommandPrefix) && Input.Contains(CommandEnd)) {
+                int start = Input.IndexOf(CommandPrefix);
+                int end = Input.IndexOf(CommandEnd);
+                if (start == -1 || end == -1) { valid = false; CommandData = null; CommandValue = null; return; }
+                string data =Input.Substring(start+CommandPrefix.Length, end-CommandEnd.Length);
                 string[] command = data.Split("____");
                 CommandValue = command[0];
 

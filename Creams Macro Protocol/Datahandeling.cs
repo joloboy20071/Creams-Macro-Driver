@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Creams_Macro_Protocol
 {
-    internal static class Datahandeling
+    public static class Datahandeling
     {
-        public static void comamndStorter(CommandType command) {
+        private static void ComamndStorter(CommandType command) {
             switch (command.commandvalue) {
-                case "0X0": 
+                case "1X1": 
                     volumeCommandHandeler(command); break;
             
             }
@@ -25,6 +25,7 @@ namespace Creams_Macro_Protocol
         
         private static void volumeCommandHandeler(CommandType command) {
             // #TODO write volume Code
+            Console.WriteLine($"pot:{command.commanddata[0]}, Volume:{command.commanddata[1]}");
 
 
         }
@@ -55,7 +56,7 @@ namespace Creams_Macro_Protocol
             string indata = sp.ReadExisting();
 
             CommandType posibleCommand = new CommandType(indata);
-            if (posibleCommand.ValidCommand) { comamndStorter(posibleCommand); }
+            if (posibleCommand.ValidCommand) { ComamndStorter(posibleCommand); }
 
             
 
@@ -63,8 +64,13 @@ namespace Creams_Macro_Protocol
         }
 
 
-
-
+        public static bool DataTest(string indata) {
+            CommandType command = new CommandType(indata);
+            if (command.ValidCommand) { ComamndStorter(command); }
+            return command.ValidCommand;
+        
+        
+        }
 
 
 

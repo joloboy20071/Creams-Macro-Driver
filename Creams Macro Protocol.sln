@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Creams Macro Protocol", "Cr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mainruntime", "ConsoleApp1\Mainruntime.csproj", "{1CD488F0-F441-4620-AE22-0833E3B68ED9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "datatest", "datatest\datatest.csproj", "{92E1CFF2-33A6-4716-8A0B-B194CD113413}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{1CD488F0-F441-4620-AE22-0833E3B68ED9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1CD488F0-F441-4620-AE22-0833E3B68ED9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1CD488F0-F441-4620-AE22-0833E3B68ED9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92E1CFF2-33A6-4716-8A0B-B194CD113413}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92E1CFF2-33A6-4716-8A0B-B194CD113413}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92E1CFF2-33A6-4716-8A0B-B194CD113413}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92E1CFF2-33A6-4716-8A0B-B194CD113413}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

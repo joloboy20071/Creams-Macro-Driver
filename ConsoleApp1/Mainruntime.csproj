@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="NotificationIcon.NET" Version="1.2.8" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Creams Macro Protocol\Creams Macro Protocol.csproj" />
   </ItemGroup>
 
