@@ -43,7 +43,7 @@ namespace Creams_Macro_Protocol
 
         }
 
-        public static SerialPort? GetCompatibleDevice() {
+        public static void GetCompatibleDevice() {
 
             List<string> PosibleComports = ports();
 
@@ -66,7 +66,7 @@ namespace Creams_Macro_Protocol
                         SerialObj.ReadTimeout = 2000;
                         SerialObj.DtrEnable = true;
 
-                        // end 
+                        SerialObj.DataReceived += new SerialDataReceivedEventHandler(Datahandeling.DataHandeler);
 
 
 
@@ -75,34 +75,18 @@ namespace Creams_Macro_Protocol
 
                         SerialObj.Write(Defaults.HandshakeRequest);
 
-                        Thread.Sleep(300);
+                        
 
-                        if (SerialObj.BytesToRead > 0)
-                        {
-                            var incommingData = SerialObj.ReadExisting();
-
-                            if (incommingData.Contains(Defaults.GoodDataResponse))
-                            {
-
-                                return SerialObj;
-                            }
-
-                            else
-                            {
-                                SerialObj.Close();
-                                return null;
-
-                            }
-
-                        }
+                        
 
                     }
-                    catch { // #TODO Create Logging message on error Containing catch error
+                    catch  {
+                        Console.WriteLine("ran into an isue");// #TODO Create Logging message on error Containing catch error
                             };
                 }
 
             }
-            return null;
+            //return null;
 
         }
 

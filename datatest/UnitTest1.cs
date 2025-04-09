@@ -3,7 +3,7 @@ namespace datatest
 {
     public class Tests
     {
-        public static string testdata = "1000011X1____00____64FFFFFF\n";
+        public static string testdata = "1000011X1____10____32FFFFFF\r\n";
        
 
         [Test]

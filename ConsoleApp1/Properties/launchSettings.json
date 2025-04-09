@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Mainruntime": {
+      "commandName": "Project",
+      "hotReloadEnabled": false
+    }
+  }
+}

@@ -2,10 +2,32 @@
 using System.IO.Ports;
 
 
+namespace CreamsMacroRuntime
+{
+    public static class runtime
+    {
 
-SerialPort serialObject = ComHandshake.GetCompatibleDevice();
+        public static void mainRuntime()
+        {
+            ComHandshake.GetCompatibleDevice();
+            //Console.WriteLine(serialObject.PortName);
+            //serialObject.Close();
+            //Console.ReadLine();
+
+        }
+    }
+}
 
 
 
+public class program {
 
-serialObject.Close();
+    public static void Main() {
+    
+        CreamsMacroRuntime.runtime.mainRuntime();
+    
+    
+    }
+
+
+}
