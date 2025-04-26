@@ -65,6 +65,7 @@ namespace Creams_Macro_Protocol
                         SerialObj.Handshake = Handshake.None;
                         SerialObj.ReadTimeout = 2000;
                         SerialObj.DtrEnable = true;
+                        //SerialObj.DsrHolding = true;
 
                         SerialObj.DataReceived += new SerialDataReceivedEventHandler(Datahandeling.DataHandeler);
 

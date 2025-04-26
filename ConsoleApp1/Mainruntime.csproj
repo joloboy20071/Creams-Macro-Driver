@@ -1,10 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>net8.0</TargetFramework>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows10.0.26100.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <UseWPF>True</UseWPF>
+    <SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,6 +15,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Creams Macro Protocol\Creams Macro Protocol.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="CreamsConsole-Utilities">
+      <HintPath>\\TRUENAS-SRV01\Milan\Milan2\pc v4\source\repos\CreamsConsole-utils\bin\Debug\net8.0\CreamsConsole-Utilities.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

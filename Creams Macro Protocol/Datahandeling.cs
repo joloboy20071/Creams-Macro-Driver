@@ -26,7 +26,7 @@ namespace Creams_Macro_Protocol
                     volumeCommandHandeler(command); break;
             
             }
-        
+            return;
         }
 
 
@@ -37,7 +37,7 @@ namespace Creams_Macro_Protocol
         }
         
         private static void volumeCommandHandeler(CommandType command) {
-            // #TODO write volume Code
+            
             Console.WriteLine($"pot:{command.commanddata[0]}, Volume:{command.commanddata[1]}");
 
 
@@ -50,9 +50,9 @@ namespace Creams_Macro_Protocol
             string indata = sp.ReadExisting();
 
 
-            if (!Handshooke) { Thread.Sleep(300); }
+            if (!Handshooke) { Thread.Sleep(300); } //Console.WriteLine(indata); }
 
-            Console.WriteLine(indata);
+           // Console.WriteLine(indata);
             CommandType posibleCommand = new CommandType(indata);
 
 
@@ -61,8 +61,8 @@ namespace Creams_Macro_Protocol
 
 
             if (posibleCommand.ValidCommand) { ComamndStorter(posibleCommand); }
-
-            
+            sp.DiscardInBuffer();
+            return;
 
             //else { Console.WriteLine("hand not shooke"); }
 
