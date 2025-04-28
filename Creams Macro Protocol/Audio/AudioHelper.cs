@@ -16,6 +16,68 @@ public class AudioHelper
     [DllImport("user32.dll", SetLastError = true)]
     public static extern uint GetWindowThreadProcessId(IntPtr hWnd, out uint processId);
 
+    public static void SetApplicationVolume(AudioHandeler.AudioProcessInfo info, float level)
+    {
+        SetApplicationVolume(info.pid, level);
+    }
+
+
+
+    public static void SetApplicationVolume(int pid, float level)
+    {
+        ISimpleAudioVolume volume = GetVolumeObject(pid);
+        if (volume == null)
+            return;
+
+        Guid guid = Guid.Empty;
+        volume.SetMasterVolume(level / 100, ref guid);
+        Marshal.ReleaseComObject(volume);
+    }
+
+    public static ISimpleAudioVolume GetVolumeObject(int pid)
+    {
+        // get the speakers (1st render + multimedia) device
+        IMMDeviceEnumerator deviceEnumerator = (IMMDeviceEnumerator)(new MMDeviceEnumerator());
+        IMMDevice speakers;
+        deviceEnumerator.GetDefaultAudioEndpoint(EDataFlow.eRender, ERole.eMultimedia, out speakers);
+
+        // activate the session manager. we need the enumerator
+        Guid IID_IAudioSessionManager2 = typeof(IAudioSessionManager2).GUID;
+        object o;
+        speakers.Activate(ref IID_IAudioSessionManager2, 0, IntPtr.Zero, out o);
+        IAudioSessionManager2 mgr = (IAudioSessionManager2)o;
+
+        // enumerate sessions for on this device
+        IAudioSessionEnumerator sessionEnumerator;
+        mgr.GetSessionEnumerator(out sessionEnumerator);
+        int count;
+        sessionEnumerator.GetCount(out count);
+
+        // search for an audio session with the required name
+        // NOTE: we could also use the process id instead of the app name (with IAudioSessionControl2)
+        ISimpleAudioVolume volumeControl = null;
+        for (int i = 0; i < count; i++)
+        {
+            IAudioSessionControl2 ctl;
+            sessionEnumerator.GetSession(i, out ctl);
+            int cpid;
+            ctl.GetProcessId(out cpid);
+
+            if (cpid == pid)
+            {
+                volumeControl = ctl as ISimpleAudioVolume;
+                break;
+            }
+            Marshal.ReleaseComObject(ctl);
+        }
+        Marshal.ReleaseComObject(sessionEnumerator);
+        Marshal.ReleaseComObject(mgr);
+        Marshal.ReleaseComObject(speakers);
+        Marshal.ReleaseComObject(deviceEnumerator);
+        return volumeControl;
+    }
+    
+
 
     public static List<Process> GetAudioProcesses()
     {
@@ -69,13 +131,17 @@ public class AudioHelper
         }
     }
 
-    public static List<Process> GetAudioProcesses2(List<int> WantedPIDs)
+    public static int GetAudioProcessCount()
     {
+        int count;
+
         IMMDeviceEnumerator deviceEnumerator = null;
         IAudioSessionEnumerator sessionEnumerator = null;
         IAudioSessionManager2 mgr = null;
         IMMDevice speakers = null;
-        List<Process> audioProcesses = new List<Process>();
+
+   
+
         try
         {
             // get the speakers (1st render + multimedia) device
@@ -90,31 +156,11 @@ public class AudioHelper
 
             // enumerate sessions for on this device
             mgr.GetSessionEnumerator(out sessionEnumerator);
-            int count;
+            
             sessionEnumerator.GetCount(out count);
 
-            // search for an audio session with the required process-id
-            for (int i = 0; i < count; ++i)
-            {
-                IAudioSessionControl2 ctl = null;
-                try
-                {
-                    sessionEnumerator.GetSession(i, out ctl);
-                    ctl.GetProcessId(out int cpid);
+            return count;
 
-
-                    if (WantedPIDs.Contains(cpid))
-                    {
-                        audioProcesses.Add(Process.GetProcessById(cpid));
-                    }
-                }
-                finally
-                {
-                    if (ctl != null) Marshal.ReleaseComObject(ctl);
-                }
-            }
-
-            return audioProcesses;
         }
         finally
         {
@@ -122,30 +168,15 @@ public class AudioHelper
             if (mgr != null) Marshal.ReleaseComObject(mgr);
             if (speakers != null) Marshal.ReleaseComObject(speakers);
             if (deviceEnumerator != null) Marshal.ReleaseComObject(deviceEnumerator);
+            
         }
+
+    
     }
 
-    public static Dictionary<string, List<int>> ProcessFinder(string[] programs)
-    {
-        Dictionary<string, List<int>> programPid = new Dictionary<string, List<int>>();
 
-        for (int i = 0; i < programs.Length; i++) { 
 
-            List<int> programPidList = new List<int>();
 
-            Process[] process = Process.GetProcessesByName(programs[i]);
-            if (process.Length > 0) {
-                for (int j = 0; j < process.Length; j++) {
-                    programPidList.Add(process[j].Id);
-                
-                }
-            }
-            programPid.Add(programs[i], programPidList);
-        
-        }
-         
-        return programPid;
-    }
 
 
 

@@ -1,3 +1,4 @@
+using System.Security.Cryptography.X509Certificates;
 using Creams_Macro_Protocol;
 namespace datatest
 {
@@ -18,5 +19,21 @@ namespace datatest
 
             Assert.Fail();
         }
+        [Test]
+        public void audioTest()
+        {
+            string[] strings = { "discord", "spotify", "chrome" };
+
+            AudioHandeler.SearchforAudio(strings);
+
+            Assert.Pass();
+
+
+        }
+
+
+        [Test]
+        public void volumeTest()
+
     }
 }

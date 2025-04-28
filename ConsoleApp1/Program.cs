@@ -10,10 +10,9 @@ namespace CreamsMacroRuntime
         {
            CreamsConsole_utils.consoleAlloc.AllocConsole();
 
-            string[] programArray =  new string[3] {"Spotify.exe","chrome.exe","discord.exe" };
 
-            AudioHandeler.SearchforAudio();
-            //ComHandshake.GetCompatibleDevice();
+            AudioHandeler.SearchforAudio(Confighandeler.programArray);
+            ComHandshake.GetCompatibleDevice();
             //Console.WriteLine(serialObject.PortName);
             //serialObject.Close();
             Console.ReadLine();
