@@ -19,8 +19,23 @@
 
   <ItemGroup>
     <Reference Include="CreamsConsole-Utilities">
-      <HintPath>\\TRUENAS-SRV01\Milan\Milan2\pc v4\source\repos\CreamsConsole-utils\bin\Debug\net8.0\CreamsConsole-Utilities.dll</HintPath>
+      <HintPath>..\..\..\CreamsConsole\bin\Release\net8.0\CreamsConsole-Utilities.dll</HintPath>
     </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
 
 </Project>

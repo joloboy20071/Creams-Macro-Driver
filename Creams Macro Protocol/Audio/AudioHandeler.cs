@@ -8,60 +8,67 @@ using System.Threading.Tasks;
 
 
 namespace Creams_Macro_Protocol;
-public static class AudioHandeler
+public partial class audio
 {
-    public static List<AudioProcessInfo> AudioProcesses
+    public static class AudioHandeler
     {
-        get
+        [Obsolete]
+        public static List<AudioProcessInfo> AudioProcesses
         {
-            return _audioProcesses;
-        }
-    }
-
-    private static List<AudioProcessInfo> _audioProcesses = new List<AudioProcessInfo>();
-
-    public struct AudioProcessInfo
-    {
-        public string ExecutableName;
-        public int sessionId;
-        public int pid;
-    }
-
-
-
-
-
-    public static void SearchforAudio(string[] programArray)
-    {
-
-        List<Process> AudioProcesses = AudioHelper.GetAudioProcesses();
-        List<AudioProcessInfo> Temp = new List<AudioProcessInfo>();
-
-
-        for (int i = 0; i < AudioProcesses.Count; i++)
-        {
-            string AudioProcess = AudioProcesses[i].ProcessName.ToLower();
-            if (programArray.Contains(AudioProcess))
+            get
             {
-                AudioProcessInfo processInfo = new AudioProcessInfo();
-                processInfo.ExecutableName = AudioProcess;
-                processInfo.pid = AudioProcesses[i].Id;
-                processInfo.sessionId = AudioProcesses[i].SessionId;
-
-                Temp.Add(processInfo);
-
+                return _audioProcesses;
             }
         }
 
-        //lock (AudioProcesses)
+        [Obsolete]
+        private static List<AudioProcessInfo> _audioProcesses = new List<AudioProcessInfo>();
+        [Obsolete]
+        public struct AudioProcessInfo
         {
-            _audioProcesses.Clear();
-            for (int i = 0; i < Temp.Count; i++)
-            {
-                _audioProcesses.Add(Temp[i]);
-            }
+            public string ExecutableName;
+            public int sessionId;
+            public int pid;
+            public ISimpleAudioVolume volume;
         }
-        return;
+
+
+
+
+
+        public static void SearchforAudio(string[] programArray)
+        {
+
+            List<Process> AudioProcesses = audio.GetAudioProcesses(audio.GetsessionEnum());
+            List<AudioProcessInfo> Temp = new List<AudioProcessInfo>();
+
+
+            for (int i = 0; i < AudioProcesses.Count; i++)
+            {
+                string AudioProcess = AudioProcesses[i].ProcessName.ToLower();
+                if (programArray.Contains(AudioProcess))
+                {
+                    AudioProcessInfo processInfo = new AudioProcessInfo();
+                    processInfo.ExecutableName = AudioProcess;
+                    processInfo.pid = AudioProcesses[i].Id;
+                    processInfo.volume = audio.GetVolume(processInfo.pid);
+                    //processInfo.sessionId = AudioProcesses[i].SessionId;
+                    processInfo.sessionId = -1;
+
+                    Temp.Add(processInfo);
+
+                }
+            }
+
+            //lock (AudioProcesses)
+            {
+                _audioProcesses.Clear();
+                for (int i = 0; i < Temp.Count; i++)
+                {
+                    _audioProcesses.Add(Temp[i]);
+                }
+            }
+            return;
 
 
 
@@ -87,5 +94,6 @@ public static class AudioHandeler
 
 
 
+        }
     }
 }

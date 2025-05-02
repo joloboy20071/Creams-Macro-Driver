@@ -28,6 +28,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="CreamsConsole-Utilities">
+      <HintPath>..\..\..\CreamsConsole\bin\Debug\net8.0\CreamsConsole-Utilities.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
     <Using Include="NUnit.Framework" />
   </ItemGroup>
 

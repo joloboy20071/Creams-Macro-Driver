@@ -75,7 +75,8 @@ namespace Creams_Macro_Protocol
                         if (!SerialObj.IsOpen) { SerialObj.Open(); } //checking if serialport is already open and if not opening it
 
                         SerialObj.Write(Defaults.HandshakeRequest);
-
+                        Thread.Sleep(100);
+                        if (!Datahandeling.Handshooke) { }
                         
 
                         

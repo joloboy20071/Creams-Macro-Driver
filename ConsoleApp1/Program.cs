@@ -1,6 +1,7 @@
 ﻿using Creams_Macro_Protocol;
 using System.IO.Ports;
 using CreamsConsole_utils;
+
 namespace CreamsMacroRuntime
 {
     public static class runtime
@@ -8,11 +9,13 @@ namespace CreamsMacroRuntime
 
         public static void mainRuntime()
         {
-           CreamsConsole_utils.consoleAlloc.AllocConsole();
+           
 
-
-            AudioHandeler.SearchforAudio(Confighandeler.programArray);
+            consoleAlloc.AllocConsole();
+            ProcessUpdateThread.Start();
+            
             ComHandshake.GetCompatibleDevice();
+
             //Console.WriteLine(serialObject.PortName);
             //serialObject.Close();
             Console.ReadLine();

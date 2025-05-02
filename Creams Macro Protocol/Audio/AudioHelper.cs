@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Creams_Macro_Protocol;
-public class AudioHelper
+public partial class AudioHelper
 {
     [DllImport("user32.dll")]
     public static extern IntPtr FindWindow(string strClassName, string strWindowName);
@@ -16,15 +15,28 @@ public class AudioHelper
     [DllImport("user32.dll", SetLastError = true)]
     public static extern uint GetWindowThreadProcessId(IntPtr hWnd, out uint processId);
 
-    public static void SetApplicationVolume(AudioHandeler.AudioProcessInfo info, float level)
+    public static void SetApplicationVolume(audio.AudioHandeler.AudioProcessInfo info, float level)
     {
-        SetApplicationVolume(info.pid, level);
+        ISimpleAudioVolume volume = info.volume;
+        if (volume == null)
+        {
+
+
+            volume = audio.GetVolume(info.pid);
+            if (volume == null)
+                return;
+        }
+        
+        Guid guid = Guid.Empty;
+        volume.SetMasterVolume(level / 100, ref guid);
+        //Marshal.ReleaseComObject(volume);
     }
 
 
 
     public static void SetApplicationVolume(int pid, float level)
     {
+
         ISimpleAudioVolume volume = GetVolumeObject(pid);
         if (volume == null)
             return;
@@ -254,11 +266,11 @@ public class AudioHelper
         [PreserveSig]
         int GetSessionEnumerator(out IAudioSessionEnumerator SessionEnum);
 
-        // the rest is not implemented
+        
     }
 
     [Guid("E2F5BB11-0570-40CA-ACDD-3AA01277DEE8"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
-    internal interface IAudioSessionEnumerator
+    public interface IAudioSessionEnumerator
     {
         [PreserveSig]
         int GetCount(out int SessionCount);
@@ -284,7 +296,7 @@ public class AudioHelper
     }
 
     [Guid("bfb7ff88-7239-4fc9-8fa2-07c950be9c6d"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
-    internal interface IAudioSessionControl2
+    public interface IAudioSessionControl2
     {
         // IAudioSessionControl
         [PreserveSig]

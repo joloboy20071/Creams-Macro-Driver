@@ -1,4 +1,5 @@
-﻿using System.IO.Ports;
+﻿using System.Diagnostics;
+using System.IO.Ports;
 
 
 
@@ -34,19 +35,19 @@ namespace Creams_Macro_Protocol
         private static void volumeCommandHandeler(CommandType command)
         {
 
-            //Console.WriteLine($"pot:{command.commanddata[0]}, Volume:{command.commanddata[1]}");
+            Debug.WriteLine($"pot:{command.commanddata[0]}, Volume:{command.commanddata[1]}");
             Task.Run(() =>
             {
                 //if (command.commanddata[0] == "11")
                 {
                     string programName = Confighandeler.PotToProgram[command.commanddata[0]];
 
-                    for (int i = 0; i < AudioHandeler.AudioProcesses.Count; i++)
+                    for (int i = 0; i < audio.AudioHandeler.AudioProcesses.Count; i++)
                     {
-                        if (programName == AudioHandeler.AudioProcesses[i].ExecutableName)
+                        if (programName == audio.AudioHandeler.AudioProcesses[i].ExecutableName)
                         {
                             float volume = (Int32.Parse(command.commanddata[1]));
-                            AudioHelper.SetApplicationVolume(AudioHandeler.AudioProcesses[i], volume);
+                            AudioHelper.SetApplicationVolume(audio.audio.AudioHandeler.AudioProcesses[i], volume);
                             return;
 
 
