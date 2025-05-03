@@ -47,7 +47,13 @@ namespace Creams_Macro_Protocol
                         if (programName == audio.AudioHandeler.AudioProcesses[i].ExecutableName)
                         {
                             float volume = (Int32.Parse(command.commanddata[1]));
-                            AudioHelper.SetApplicationVolume(audio.audio.AudioHandeler.AudioProcesses[i], volume);
+                            
+
+
+
+
+
+
                             return;
 
 

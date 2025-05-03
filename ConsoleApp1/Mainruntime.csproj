@@ -19,7 +19,7 @@
 
   <ItemGroup>
     <Reference Include="CreamsConsole-Utilities">
-      <HintPath>..\..\..\CreamsConsole\bin\Release\net8.0\CreamsConsole-Utilities.dll</HintPath>
+      <HintPath>\\TRUENAS-SRV01\Milan\Milan2\pc v4\source\repos\CreamsConsole-utils\bin\Debug\net8.0\CreamsConsole-Utilities.dll</HintPath>
     </Reference>
   </ItemGroup>
 

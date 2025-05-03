@@ -7,8 +7,8 @@ namespace Creams_Macro_Protocol
     {
         public static List<audioProccesObject> ProccesObjects = new List<audioProccesObject>();
 
-        public static class audioProcessObjectFactory {
-            public static audioProccesObject CreateObject(IAudioSessionControl2 sesh) {
+         public static class audioProcessObjectFactory {
+            private static audioProccesObject CreateObject(IAudioSessionControl2 sesh) {
                 string name;
                 int PID = sesh.GetProcessId(out PID);
                 sesh.GetDisplayName(out name);
@@ -19,6 +19,22 @@ namespace Creams_Macro_Protocol
 
             
             }
+
+
+            public static List<audioProccesObject> GetAudioObjects(List<IAudioSessionControl2> sessionlist)
+            {
+               
+
+                for (int i = 0; i < sessionlist.Count; i++) {
+                    CreateObject(sessionlist[i]);
+
+                }
+
+                return ProccesObjects;
+
+            }
+
+
 
 
 
@@ -38,6 +54,11 @@ namespace Creams_Macro_Protocol
 
         public class audioProccesObject
         {
+            public string Name
+            {
+                get {return name;}
+            }
+
             private string name;
             private int pid;
             private ISimpleAudioVolume volumeobj;
@@ -54,8 +75,6 @@ namespace Creams_Macro_Protocol
                 volumeobj = getVolume();
 
                 ProccesObjects.Add(this);
-
-
 
                 return;
             }

@@ -15,7 +15,7 @@ public partial class AudioHelper
     [DllImport("user32.dll", SetLastError = true)]
     public static extern uint GetWindowThreadProcessId(IntPtr hWnd, out uint processId);
 
-    public static void SetApplicationVolume(audio.AudioHandeler.AudioProcessInfo info, float level)
+    /*(public static void SetApplicationVolume(audio.AudioHandeler.AudioProcessInfo info, float level)
     {
         ISimpleAudioVolume volume = info.volume;
         if (volume == null)
@@ -30,7 +30,7 @@ public partial class AudioHelper
         Guid guid = Guid.Empty;
         volume.SetMasterVolume(level / 100, ref guid);
         //Marshal.ReleaseComObject(volume);
-    }
+    }*/
 
 
 

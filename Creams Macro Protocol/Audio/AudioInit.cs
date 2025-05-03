@@ -4,7 +4,7 @@ namespace Creams_Macro_Protocol
 {
     public partial class audio
     {
-        internal static List<IAudioSessionControl2> AllUsefullCTL = new List<IAudioSessionControl2>();
+        public static List<IAudioSessionControl2> AllUsefullCTL = new List<IAudioSessionControl2>();
         internal static List<IAudioSessionControl2> AllCtlProcesses = null;
 
 
@@ -69,7 +69,7 @@ namespace Creams_Macro_Protocol
 
                 IAudioSessionControl2 shesh;
 
-
+                shesh.
                 sessionEnumerator.GetSession(i, out shesh);
                 controlList.Add(shesh);
 
@@ -90,18 +90,44 @@ namespace Creams_Macro_Protocol
         }
 
 
+        public static List<IAudioSessionControl2> audioFilter(List<IAudioSessionControl2> audiolist,string[] processNames)
+        {
+            List<IAudioSessionControl2> tempList = new List<IAudioSessionControl2>();
+            string compare;
 
-        public void AudioInit()
+
+            for (int i = 0; i < audiolist.Count; i++) {
+
+
+                
+               ISimpleAudioVolume d = audiolist[i] as ISimpleAudioVolume;
+                
+                if (processNames.Contains(compare))
+                {
+                    tempList.Add(audiolist[i]);
+                }
+
+                        
+            }
+            return tempList;
+        } 
+
+
+
+
+
+
+
+
+
+        public static void AudioInit()
         {
             AllCtlProcesses = Getproces();
 
+            var temp = audioFilter(AllCtlProcesses, Confighandeler.programArray);
 
-
-
-
-
-
-
+            audioProcessObjectFactory.GetAudioObjects(temp);
+                      
         }
     }
 }

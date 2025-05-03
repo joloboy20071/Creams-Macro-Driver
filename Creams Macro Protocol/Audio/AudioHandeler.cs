@@ -36,7 +36,7 @@ public partial class audio
 
 
 
-        public static void SearchforAudio(string[] programArray)
+       /* public static void SearchforAudio(string[] programArray)
         {
 
             List<Process> AudioProcesses = audio.GetAudioProcesses(audio.GetsessionEnum());
@@ -94,6 +94,6 @@ public partial class audio
 
 
 
-        }
+        }*/
     }
 }
