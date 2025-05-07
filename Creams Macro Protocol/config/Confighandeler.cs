@@ -14,7 +14,7 @@ public class Confighandeler
 {
     public static string[] programArray = new string[3] { "discord", "chrome", "spotify" };
     public static Dictionary<string,string> PotToProgram  = new Dictionary<string, string>() { { "01", programArray[0] }, { "10", programArray[1] }, { "11", programArray[2] } };
-
+    public static Dictionary<int,string> intToPot = new Dictionary<int, string>() { { 0,"01"}, { 1,"10"}, { 2,"11"} };
     public static int UpdateIntervalms = 1000; 
     
     

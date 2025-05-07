@@ -1,4 +1,5 @@
-﻿using System.Runtime.InteropServices;
+﻿using System.Diagnostics;
+using System.Runtime.InteropServices;
 
 
 namespace Creams_Macro_Protocol
@@ -7,13 +8,32 @@ namespace Creams_Macro_Protocol
     {
         public static List<audioProccesObject> ProccesObjects = new List<audioProccesObject>();
 
-         public static class audioProcessObjectFactory {
-            private static audioProccesObject CreateObject(IAudioSessionControl2 sesh) {
-                string name;
-                int PID = sesh.GetProcessId(out PID);
-                sesh.GetDisplayName(out name);
+        public static Dictionary<string, float> VolumeLookup = new Dictionary<string, float>();
 
-                return new audioProccesObject(name, PID, sesh);
+        public static void VolumeLookupInnit()
+        {
+            for (int i = 0; i < 101; i++) {
+                VolumeLookup.Add($"{i}", i / 100f);
+               
+            
+            }
+
+
+        }
+
+
+
+
+
+         public static class audioProcessObjectFactory {
+            private static audioProccesObject CreateObject(pidCtl2 sesh) {
+
+
+                string name = sesh.process.ProcessName;
+                int PID = sesh.pid;
+                IAudioSessionControl2 shesh2 = sesh.clt;
+
+                return new audioProccesObject(name, PID, shesh2);
 
 
 
@@ -21,7 +41,7 @@ namespace Creams_Macro_Protocol
             }
 
 
-            public static List<audioProccesObject> GetAudioObjects(List<IAudioSessionControl2> sessionlist)
+            public static List<audioProccesObject> GetAudioObjects(List<pidCtl2> sessionlist)
             {
                
 
@@ -54,6 +74,14 @@ namespace Creams_Macro_Protocol
 
         public class audioProccesObject
         {
+
+
+
+
+
+
+
+
             public string Name
             {
                 get {return name;}
@@ -64,6 +92,9 @@ namespace Creams_Macro_Protocol
             private ISimpleAudioVolume volumeobj;
 
             private IAudioSessionControl2 ctl;
+
+
+            private float Lastvolume = -1f;
 
             private Guid guid = Guid.Empty;
 
@@ -95,6 +126,15 @@ namespace Creams_Macro_Protocol
 
             public void SetVolume(int level)
             {
+                SetVolume(level / 100f);
+                return;
+            }
+
+            public void SetVolume(float level)
+            {
+                if (level == Lastvolume) { return; }
+
+
                 if (volumeobj == null) { try { getVolume(); return; } catch { this.release(); } } 
                 //  ^ Note should init new session enum and try and create new object 
                 //  | unless there is a chance unmanaged objects dont get freed up in memory until next pc boot
@@ -104,7 +144,8 @@ namespace Creams_Macro_Protocol
                 {
                     guid = Guid.Empty;
                     
-                    volumeobj.SetMasterVolume(level / 100, ref guid);
+                    volumeobj.SetMasterVolume(level, ref guid);
+                    Lastvolume = level;
                     return;
                 }
                 
@@ -113,7 +154,14 @@ namespace Creams_Macro_Protocol
             }
 
 
+            public void SetVolume(string level)
+            {
+                SetVolume(VolumeLookup[level]);
 
+
+
+
+            }
 
 
 

@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using static Creams_Macro_Protocol.audio;
-
+/*
 namespace Creams_Macro_Protocol;
 
 public partial class audio
@@ -82,4 +82,4 @@ public partial class audio
 
 
     }
-}
+}*/

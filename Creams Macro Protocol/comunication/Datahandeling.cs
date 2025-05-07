@@ -35,26 +35,20 @@ namespace Creams_Macro_Protocol
         private static void volumeCommandHandeler(CommandType command)
         {
 
-            Debug.WriteLine($"pot:{command.commanddata[0]}, Volume:{command.commanddata[1]}");
+            // Debug.WriteLine($"pot:{command.commanddata[0]}, Volume:{command.commanddata[1]}");
+            audio.counterI += 1;
             Task.Run(() =>
             {
                 //if (command.commanddata[0] == "11")
                 {
-                    string programName = Confighandeler.PotToProgram[command.commanddata[0]];
+                    List<audio.audioProccesObject> list = audio.useableObjectList[command.commanddata[0]];
 
-                    for (int i = 0; i < audio.AudioHandeler.AudioProcesses.Count; i++)
-                    {
-                        if (programName == audio.AudioHandeler.AudioProcesses[i].ExecutableName)
-                        {
-                            float volume = (Int32.Parse(command.commanddata[1]));
-                            
+                    if (list.Count == 0) { return; }
 
-
-
-
-
-
-                            return;
+                for (int i = 0; i < list.Count; i++)
+                {
+                        list[i].SetVolume(audio.VolumeLookup[command.commanddata[1]]);
+                        return;
 
 
 
@@ -66,7 +60,7 @@ namespace Creams_Macro_Protocol
                     }
 
 
-                }
+                
             });
         }
 
@@ -74,7 +68,7 @@ namespace Creams_Macro_Protocol
         public static void DataHandeler(object Sender, SerialDataReceivedEventArgs Eventarg)
         {
 
-            SerialPort sp = (SerialPort)Sender;
+            SerialPort sp = ComHandshake.sender;
             string indata = sp.ReadExisting();
 
 

@@ -16,7 +16,7 @@ namespace Creams_Macro_Protocol
     {
         private static bool handshooke = false;
         private static string? handshookecomport = null;
-
+        public static SerialPort sender;
         public static bool Handshooke { get { return handshooke; } }
         public static string? HandshookeComport { get {return handshookecomport; } }
 
@@ -44,7 +44,7 @@ namespace Creams_Macro_Protocol
         }
 
         public static void GetCompatibleDevice() {
-
+            audio.VolumeLookupInnit();
             List<string> PosibleComports = ports();
 
 
@@ -73,10 +73,10 @@ namespace Creams_Macro_Protocol
 
 
                         if (!SerialObj.IsOpen) { SerialObj.Open(); } //checking if serialport is already open and if not opening it
-
+                        sender = SerialObj;
                         SerialObj.Write(Defaults.HandshakeRequest);
-                        Thread.Sleep(100);
-                        if (!Datahandeling.Handshooke) { }
+                        Thread.Sleep(300);
+                        if (Datahandeling.Handshooke) {  }
                         
 
                         

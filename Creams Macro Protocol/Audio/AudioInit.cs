@@ -1,4 +1,6 @@
-﻿using System.Runtime.InteropServices;
+﻿using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Runtime.InteropServices;
 
 namespace Creams_Macro_Protocol
 {
@@ -15,6 +17,9 @@ namespace Creams_Macro_Protocol
         private static IAudioSessionManager2 mgr = null;
         private static IMMDevice speakers = null;
 
+        public static Dictionary<string, List<audioProccesObject>> useableObjectList = new Dictionary<string, List<audioProccesObject>>();
+
+
         public static int Count
         {
             get { return AllCtlProcesses.Count(); }
@@ -23,7 +28,13 @@ namespace Creams_Macro_Protocol
 
 
 
+        public struct pidCtl2
+        {
+            public int pid;
+            public IAudioSessionControl2 clt;
+            public Process process;
 
+        }
 
 
 
@@ -69,7 +80,7 @@ namespace Creams_Macro_Protocol
 
                 IAudioSessionControl2 shesh;
 
-                shesh.
+               
                 sessionEnumerator.GetSession(i, out shesh);
                 controlList.Add(shesh);
 
@@ -90,21 +101,27 @@ namespace Creams_Macro_Protocol
         }
 
 
-        public static List<IAudioSessionControl2> audioFilter(List<IAudioSessionControl2> audiolist,string[] processNames)
+        public static List<pidCtl2> audioFilter(List<IAudioSessionControl2> audiolist,string[] processNames)
         {
-            List<IAudioSessionControl2> tempList = new List<IAudioSessionControl2>();
-            string compare;
+            List<pidCtl2> tempList = new List<pidCtl2>();
+           
 
 
             for (int i = 0; i < audiolist.Count; i++) {
-
+                Process compare;
+                int PID;
+                audiolist[i].GetProcessId(out PID);
+                compare = Process.GetProcessById(PID);
 
                 
-               ISimpleAudioVolume d = audiolist[i] as ISimpleAudioVolume;
-                
-                if (processNames.Contains(compare))
+                if (processNames.Contains(compare.ProcessName.ToLower()))
                 {
-                    tempList.Add(audiolist[i]);
+                    pidCtl2 temp = new pidCtl2();
+                    temp.pid = PID;
+                    temp.clt = audiolist[i];
+                    temp.process = compare;
+
+                    tempList.Add(temp);
                 }
 
                         
@@ -113,7 +130,7 @@ namespace Creams_Macro_Protocol
         }
 
 
-        []
+        
 
 
 
@@ -122,12 +139,37 @@ namespace Creams_Macro_Protocol
 
         public static void AudioInit()
         {
+            
             AllCtlProcesses = Getproces();
 
             var temp = audioFilter(AllCtlProcesses, Confighandeler.programArray);
 
             audioProcessObjectFactory.GetAudioObjects(temp);
-                      
+
+            useableObjectList.Clear();
+
+
+            for (int i = 0; i<Confighandeler.programArray.Length; i++) {
+                List<audioProccesObject> templist = new List<audioProccesObject>();
+                for (int j = 0; j < ProccesObjects.Count; j++) {
+                    if (Confighandeler.programArray[i] == ProccesObjects[j].Name.ToLower()) {
+                        templist.Add(ProccesObjects[j]);
+                    
+                    }
+
+                
+                }
+                useableObjectList.Add(Confighandeler.intToPot[i], templist);
+            
+            
+            
+            }
+
+            
+
+
+
+
         }
     }
 }

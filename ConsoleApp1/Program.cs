@@ -1,8 +1,10 @@
 ﻿using Creams_Macro_Protocol;
-using System.IO.Ports;
+
 using CreamsConsole_utils;
-using System.Reflection.PortableExecutable;
+
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
+
 
 namespace CreamsMacroRuntime
 {
@@ -11,7 +13,7 @@ namespace CreamsMacroRuntime
 
         public static void mainRuntime()
         {
-
+            
 
             consoleAlloc.AllocConsole();
             //ProcessUpdateThread.Start();
@@ -19,9 +21,11 @@ namespace CreamsMacroRuntime
             for (int i = 0; i < audio.ProccesObjects.Count; i++)
             {
                 Debug.WriteLine($"{audio.ProccesObjects[i].Name}");
+            }
 
-                // ComHandshake.GetCompatibleDevice();
+                ComHandshake.GetCompatibleDevice();
 
+                Task.Run(() => { Thread.Sleep(10000); Debug.WriteLine(audio.counterI); Thread.Sleep(100000); Debug.WriteLine(audio.counterI); });
                 //Console.WriteLine(serialObject.PortName);
                 //serialObject.Close();
                 Console.ReadLine();
@@ -29,7 +33,7 @@ namespace CreamsMacroRuntime
             }
         }
     }
-}
+
 
 
 
