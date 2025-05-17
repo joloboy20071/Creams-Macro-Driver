@@ -24,8 +24,9 @@ namespace CreamsMacroRuntime
             }
 
                 ComHandshake.GetCompatibleDevice();
+                ProcessUpdateThread.StartUpdate();
 
-                Task.Run(() => { Thread.Sleep(10000); Debug.WriteLine(audio.counterI); Thread.Sleep(100000); Debug.WriteLine(audio.counterI); });
+                //Task.Run(() => { Thread.Sleep(1000); Debug.WriteLine(audio.counterI); Thread.Sleep(100000); Debug.WriteLine(audio.counterI); });
                 //Console.WriteLine(serialObject.PortName);
                 //serialObject.Close();
                 Console.ReadLine();
