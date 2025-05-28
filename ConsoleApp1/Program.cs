@@ -8,44 +8,21 @@ using System.Runtime.CompilerServices;
 
 namespace CreamsMacroRuntime
 {
-    public static class runtime
+
+
+
+
+
+    public class program
     {
-
-        public static void mainRuntime()
+        
+        public static void Main()
         {
-            
 
-            consoleAlloc.AllocConsole();
-            //ProcessUpdateThread.Start();
-            audio.AudioInit();
-            for (int i = 0; i < audio.ProccesObjects.Count; i++)
-            {
-                Debug.WriteLine($"{audio.ProccesObjects[i].Name}");
-            }
+            Creams_Macro_Protocol.runtime.mainRuntime();
+            Console.ReadLine();
 
-                ComHandshake.GetCompatibleDevice();
-                ProcessUpdateThread.StartUpdate();
-
-                //Task.Run(() => { Thread.Sleep(1000); Debug.WriteLine(audio.counterI); Thread.Sleep(100000); Debug.WriteLine(audio.counterI); });
-                //Console.WriteLine(serialObject.PortName);
-                //serialObject.Close();
-                Console.ReadLine();
-
-            }
         }
+
     }
-
-
-
-
-public class program {
-    [STAThread]
-    public static void Main() {
-    
-        CreamsMacroRuntime.runtime.mainRuntime();
-    
-    
-    }
-
-
 }

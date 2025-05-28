@@ -11,4 +11,10 @@
     <PackageReference Include="System.IO.Ports" Version="9.0.4" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="CreamsConsole-Utilities">
+      <HintPath>\\TRUENAS-SRV01\Milan\Milan2\pc v4\source\repos\CreamsConsole-utils\bin\Debug\net8.0\CreamsConsole-Utilities.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

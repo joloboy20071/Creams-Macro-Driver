@@ -76,7 +76,7 @@ namespace Creams_Macro_Protocol
                         sender = SerialObj;
                         SerialObj.Write(Defaults.HandshakeRequest);
                         Thread.Sleep(300);
-                        if (Datahandeling.Handshooke) {  }
+                        if (Datahandeling.Handshooke) { ProcessUpdateThread.StartUpdate(); }
                         
 
                         

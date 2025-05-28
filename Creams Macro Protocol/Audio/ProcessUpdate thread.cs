@@ -32,6 +32,19 @@ namespace Creams_Macro_Protocol
             return process.Length;
         }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
         public static void StartUpdate()
         {
             int LastProgramCount = 0;
@@ -48,6 +61,10 @@ namespace Creams_Macro_Protocol
                         LastProgramCount = newCount;
                         Debug.WriteLine(newCount);
                         audio.AudioInit();
+                        for (int i = 0; i < audio.ProccesObjects.Count; i++)
+                        {
+                            Debug.WriteLine($"{audio.ProccesObjects[i].Name}");
+                        }
                     }
                     Thread.Sleep(1000);
 

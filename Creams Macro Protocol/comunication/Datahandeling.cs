@@ -41,14 +41,22 @@ namespace Creams_Macro_Protocol
             {
                 //if (command.commanddata[0] == "11")
                 {
-                    List<audio.audioProccesObject> list = audio.useableObjectList[command.commanddata[0]];
+                    try
+                    {
+                        List<audio.audioProccesObject> list = audio.useableObjectList[command.commanddata[0]];
+                        if (list.Count == 0) { return; }
 
-                    if (list.Count == 0) { return; }
-
-                for (int i = 0; i < list.Count; i++)
-                {
-                        list[i].SetVolume(audio.VolumeLookup[command.commanddata[1]]);
+                        for (int i = 0; i < list.Count; i++)
+                        {
+                            list[i].SetVolume(audio.VolumeLookup[command.commanddata[1]]);
+                            Debug.WriteLine(list[i].Name);
+                           
+                        }
                         return;
+                    }
+                    catch { return; }
+
+                    
 
 
 
@@ -57,7 +65,7 @@ namespace Creams_Macro_Protocol
 
 
                         }
-                    }
+                    
 
 
                 

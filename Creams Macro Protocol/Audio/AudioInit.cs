@@ -11,7 +11,7 @@ namespace Creams_Macro_Protocol
 
 
 
-        
+
         private static IMMDeviceEnumerator deviceEnumerator = null;
         private static IAudioSessionEnumerator sessionEnumerator = null;
         private static IAudioSessionManager2 mgr = null;
@@ -22,7 +22,10 @@ namespace Creams_Macro_Protocol
 
         public static int Count
         {
-            get { return AllCtlProcesses.Count(); }
+            get
+            {
+                return AllCtlProcesses.Count();
+            }
         }
 
 
@@ -80,7 +83,7 @@ namespace Creams_Macro_Protocol
 
                 IAudioSessionControl2 shesh;
 
-               
+
                 sessionEnumerator.GetSession(i, out shesh);
                 controlList.Add(shesh);
 
@@ -101,19 +104,20 @@ namespace Creams_Macro_Protocol
         }
 
 
-        public static List<pidCtl2> audioFilter(List<IAudioSessionControl2> audiolist,string[] processNames)
+        public static List<pidCtl2> audioFilter(List<IAudioSessionControl2> audiolist, string[] processNames)
         {
             List<pidCtl2> tempList = new List<pidCtl2>();
-           
 
 
-            for (int i = 0; i < audiolist.Count; i++) {
+
+            for (int i = 0; i < audiolist.Count; i++)
+            {
                 Process compare;
                 int PID;
                 audiolist[i].GetProcessId(out PID);
                 compare = Process.GetProcessById(PID);
 
-                
+
                 if (processNames.Contains(compare.ProcessName.ToLower()))
                 {
                     pidCtl2 temp = new pidCtl2();
@@ -124,13 +128,13 @@ namespace Creams_Macro_Protocol
                     tempList.Add(temp);
                 }
 
-                        
+
             }
             return tempList;
         }
 
 
-        
+
 
 
 
@@ -139,37 +143,48 @@ namespace Creams_Macro_Protocol
 
         public static void AudioInit()
         {
-            
-            AllCtlProcesses = Getproces();
 
-            var temp = audioFilter(AllCtlProcesses, Confighandeler.programArray);
-
-            audioProcessObjectFactory.GetAudioObjects(temp);
-
-            useableObjectList.Clear();
-
-
-            for (int i = 0; i<Confighandeler.programArray.Length; i++) {
-                List<audioProccesObject> templist = new List<audioProccesObject>();
-                for (int j = 0; j < ProccesObjects.Count; j++) {
-                    if (Confighandeler.programArray[i] == ProccesObjects[j].Name.ToLower()) {
-                        templist.Add(ProccesObjects[j]);
-                    
-                    }
-
-                
-                }
-                useableObjectList.Add(Confighandeler.intToPot[i], templist);
-            
-            
-            
+            if (useableObjectList.Count > 0)
+            {
+                for (int i = 0; i < useableObjectList.Count; i++) { for (int j = 0; j < useableObjectList[Confighandeler.intToPot[i]].Count(); j++) { useableObjectList[Confighandeler.intToPot[i]][j].release(); } }
             }
 
+
+                AllCtlProcesses = Getproces();
+
+                var temp = audioFilter(AllCtlProcesses, Confighandeler.programArray);
+                ProccesObjects.Clear();
+                audioProcessObjectFactory.GetAudioObjects(temp);
+
+                useableObjectList.Clear();
+
+
+
+                for (int i = 0; i < Confighandeler.programArray.Length; i++)
+                {
+                    List<audioProccesObject> templist = new List<audioProccesObject>();
+                    for (int j = 0; j < ProccesObjects.Count; j++)
+                    {
+                        if (Confighandeler.programArray[i] == ProccesObjects[j].Name.ToLower())
+                        {
+                            templist.Add(ProccesObjects[j]);
+
+                        }
+
+
+                    }
+                    useableObjectList.Add(Confighandeler.intToPot[i], templist);
+
+
+
+                }
+
+
+
+
+
+
             
-
-
-
-
         }
     }
 }
