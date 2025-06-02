@@ -172,7 +172,7 @@ namespace Creams_Macro_Protocol
 
             public bool isalive() { throw new NotImplementedException(); }  //#TODO Create a function that cheks  
 
-            public void release()
+            public void release() /// not fully implemented because Idisposable isnt implemmented and should be in the futre
             {
                 Marshal.ReleaseComObject(volumeobj);
                 Marshal.ReleaseComObject(ctl);
