@@ -6,10 +6,25 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Configuration;
+using Newtonsoft.Json;
+using System.IO;
 
 namespace Creams_Macro_Protocol;
 
 // temp dummy class for testing needs implementing
+
+
+
+
+
+
+
+
+
+
+
+
+
 public class Confighandeler
 {
     public static string[] programArray = new string[3] { "chrome", "spotify", "discord" };
@@ -20,8 +35,20 @@ public class Confighandeler
     
     
 }
-public class SerialConfig
+
+
+public class settings
 {
+    
+
+
+
+
+
+
+
+
+
 
 
 

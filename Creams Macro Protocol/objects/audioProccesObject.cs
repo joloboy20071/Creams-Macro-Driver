@@ -87,6 +87,14 @@ namespace Creams_Macro_Protocol
                 get {return name;}
             }
 
+            public int Level
+            {
+                get
+                {
+                    return (int)Lastvolume;
+                }
+            }
+
             private string name;
             private int pid;
             private ISimpleAudioVolume volumeobj;
@@ -135,7 +143,7 @@ namespace Creams_Macro_Protocol
                 if (level == Lastvolume) { return; }
 
 
-                if (volumeobj == null) { try { getVolume(); return; } catch { this.release(); } } 
+                if (volumeobj == null) { try { getVolume(); return; } catch  { this.release(); Logger.Debug($"[{DateTime.Now}]: trying to get a volume object failed on audio obj: [name:{name}],[PID:{pid}]    ") ;  } } 
                 //  ^ Note should init new session enum and try and create new object 
                 //  | unless there is a chance unmanaged objects dont get freed up in memory until next pc boot
 

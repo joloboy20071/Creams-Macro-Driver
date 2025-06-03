@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace Creams_Macro_Protocol.logger
+namespace Creams_Macro_Protocol
 {
     internal static class Logger
     {
