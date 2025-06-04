@@ -4,14 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Creams_Macro_Protocol.objects;
-public struct settingObj
+namespace Creams_Macro_Protocol;
+public class settingObj:Object 
 {
-    public static string[] VolumeAdjustedPrograms = new string[3] { "chrome", "spotify", "discord" };
-    public static int UpdateIntervalMS = 1000;
-    public static bool debug = false;
+    public  string[] VolumeAdjustedPrograms  {get; set; } ={ "chrome", "spotify", "discord" };
+    public int UpdateIntervalMS { get; set; } =  1000;
+    public bool debug
+    {
+        get; set;
+    } = false;
 
-    public static bool isTomEenMannenliefhebber = true;
+    public bool isTomEenMannenliefhebber { get; set; } = true;
+
+    public string COMPORT { get; set; } = null; // tells the program that is should search for a compatibale port
+
 
 
 

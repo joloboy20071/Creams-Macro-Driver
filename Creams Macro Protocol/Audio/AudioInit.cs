@@ -152,7 +152,7 @@ namespace Creams_Macro_Protocol
 
                 AllCtlProcesses = Getproces();
 
-                var temp = audioFilter(AllCtlProcesses, Confighandeler.programArray);
+                var temp = audioFilter(AllCtlProcesses, Confighandeler.settings.VolumeAdjustedPrograms);
                 ProccesObjects.Clear();
                 audioProcessObjectFactory.GetAudioObjects(temp);
 
@@ -160,12 +160,12 @@ namespace Creams_Macro_Protocol
 
 
 
-                for (int i = 0; i < Confighandeler.programArray.Length; i++)
+                for (int i = 0; i < Confighandeler.settings.VolumeAdjustedPrograms.Length; i++)
                 {
                     List<audioProccesObject> templist = new List<audioProccesObject>();
                     for (int j = 0; j < ProccesObjects.Count; j++)
                     {
-                        if (Confighandeler.programArray[i] == ProccesObjects[j].Name.ToLower())
+                        if (Confighandeler.settings.VolumeAdjustedPrograms[i] == ProccesObjects[j].Name.ToLower())
                         {
                             templist.Add(ProccesObjects[j]);
 

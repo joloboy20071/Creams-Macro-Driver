@@ -55,7 +55,7 @@ namespace Creams_Macro_Protocol
             {
                 while (isrunning)
                 {
-                    int newCount = GetAmountProcessesByName(Confighandeler.programArray);
+                    int newCount = GetAmountProcessesByName(Confighandeler.settings.VolumeAdjustedPrograms);
                     if (newCount != LastProgramCount)
                     {
                         LastProgramCount = newCount;
