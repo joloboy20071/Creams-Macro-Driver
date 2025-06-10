@@ -47,9 +47,10 @@ namespace Creams_Macro_Protocol
 
         public static void StartUpdate()
         {
+
             int LastProgramCount = 0;
 
-
+            Logger.Info("started Update thread");
             isrunning = true;
             //Task.Run(() =>
             {

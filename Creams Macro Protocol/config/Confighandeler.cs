@@ -13,7 +13,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Creams_Macro_Protocol;
 
-// temp dummy class for testing needs implementing
+
 
 
 
@@ -35,13 +35,17 @@ public class Confighandeler
     
     public static Dictionary<string, string> PotToProgram = new Dictionary<string, string>() { { "01", settings.VolumeAdjustedPrograms[0] }, { "10", settings.VolumeAdjustedPrograms[1] }, { "11", settings.VolumeAdjustedPrograms[2] } };
     public static Dictionary<int, string> intToPot = new Dictionary<int, string>() { { 0, "01" }, { 1, "10" }, { 2, "11" } };
-    public static int UpdateIntervalms = 1000;
+   
 
 
     private static void CreateJsonFile(string path, settingObj Object)
     {
         string jsonString = JsonConvert.SerializeObject(Object);
-        Console.WriteLine(jsonString);
+        //Console.WriteLine(jsonString);
+
+        Logger.Info(jsonString);
+
+
         using (FileStream fs = File.Create(path))
         {
             byte[] info = new UTF8Encoding(true).GetBytes(jsonString);
@@ -76,30 +80,16 @@ public class Confighandeler
         
         settingObj settings = ReadJson(path);
 
+        
+       
+        Logger.Info($"config loaded: {JsonConvert.SerializeObject(settings)}");
+
         return settings;
 
 
 
 
     }
-
-
-
-
-
-
-}
-
-
-public class settings
-{
-    
-
-
-
-
-
-
 
 
 

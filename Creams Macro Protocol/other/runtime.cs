@@ -13,10 +13,21 @@ public class runtime
         {
 
             consoleAlloc.AllocConsole();
+            
         }
+
+        Logger.Info($"use console : [{console}]");
+
         audio.AudioInit();
+        
+        Logger.Info("trying to init audio processes");
+        Logger.Info("searching for Macropad");
+        
         ComHandshake.GetCompatibleDevice();
-        ProcessUpdateThread.StartUpdate();
+
+        //Logger.Info("staring audio update cycle ");
+
+        //ProcessUpdateThread.StartUpdate();
 
 
        

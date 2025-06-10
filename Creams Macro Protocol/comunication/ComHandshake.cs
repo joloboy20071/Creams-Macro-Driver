@@ -11,21 +11,34 @@ using System.IO.Ports;
 
 namespace Creams_Macro_Protocol
 {
-   
+
     public static class ComHandshake
     {
         private static bool handshooke = false;
         private static string? handshookecomport = null;
         public static SerialPort sender;
-        public static bool Handshooke { get { return handshooke; } }
-        public static string? HandshookeComport { get {return handshookecomport; } }
+        public static bool Handshooke
+        {
+            get
+            {
+                return handshooke;
+            }
+        }
+        public static string? HandshookeComport
+        {
+            get
+            {
+                return handshookecomport;
+            }
+        }
 
 
         //================================================//
 
-        private static List<string> ports() {
+        private static List<string> ports()
+        {
 
-            List<Win32DeviceMgmt.DeviceInfo> allports= Win32DeviceMgmt.GetAllCOMPorts();
+            List<Win32DeviceMgmt.DeviceInfo> allports = Win32DeviceMgmt.GetAllCOMPorts();
 
             List<string> PosableCompatibleports = new List<string>();
 
@@ -33,9 +46,10 @@ namespace Creams_Macro_Protocol
             {
                 string busName = allports[i].bus_description;
 
-                if (busName.Contains(Defaults.busdiscriptionFilter)) {
+                if (busName.Contains(Defaults.busdiscriptionFilter))
+                {
                     PosableCompatibleports.Add(allports[i].name);
-                
+
                 }
             }
 
@@ -43,7 +57,8 @@ namespace Creams_Macro_Protocol
 
         }
 
-        public static void GetCompatibleDevice() {
+        public static void GetCompatibleDevice()
+        {
             audio.VolumeLookupInnit();
             List<string> PosibleComports = ports();
 
@@ -51,11 +66,12 @@ namespace Creams_Macro_Protocol
 
             if (PosibleComports.Count > 0)
             {
-              for (int i =0; i< PosibleComports.Count; i++)  {
+                for (int i = 0; i < PosibleComports.Count; i++)
+                {
                     try
                     {
                         SerialPort SerialObj = new SerialPort(PosibleComports[i]);
-                       
+
                         //serial Connection setup
 
                         SerialObj.BaudRate = 115200;
@@ -76,35 +92,39 @@ namespace Creams_Macro_Protocol
                         sender = SerialObj;
                         SerialObj.Write(Defaults.HandshakeRequest);
                         Thread.Sleep(300);
-                        if (Datahandeling.Handshooke) { ProcessUpdateThread.StartUpdate(); }
-                        
+                        if (Datahandeling.Handshooke) { 
+                            Logger.Info($"Macropad Found on COM port: [{SerialObj.PortName}]");
 
-                        
+                            ProcessUpdateThread.StartUpdate(); }
+
+
+
 
                     }
-                    catch  {
-                        Console.WriteLine("ran into an isue");// #TODO Create Logging message on error Containing catch error
-                            };
+                    catch
+                    {
+                        Logger.Error("ran into an isue");// 
+                    }
+
                 }
+                //return null;
 
             }
-            //return null;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 }
