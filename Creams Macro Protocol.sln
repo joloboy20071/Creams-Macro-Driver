@@ -5,9 +5,7 @@ VisualStudioVersion = 17.12.35728.132
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Creams Macro Protocol", "Creams Macro Protocol\Creams Macro Protocol.csproj", "{D67C46CE-D710-46D1-A4B0-6DA229059E1B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mainruntime", "ConsoleApp1\Mainruntime.csproj", "{1CD488F0-F441-4620-AE22-0833E3B68ED9}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "datatest", "datatest\datatest.csproj", "{92E1CFF2-33A6-4716-8A0B-B194CD113413}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MacroPadDriver", "ConsoleApp1\MacroPadDriver.csproj", "{66D7F5A3-55F5-0E6F-F5F0-E8AB6E479F04}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,16 +17,15 @@ Global
 		{D67C46CE-D710-46D1-A4B0-6DA229059E1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D67C46CE-D710-46D1-A4B0-6DA229059E1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D67C46CE-D710-46D1-A4B0-6DA229059E1B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1CD488F0-F441-4620-AE22-0833E3B68ED9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1CD488F0-F441-4620-AE22-0833E3B68ED9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1CD488F0-F441-4620-AE22-0833E3B68ED9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1CD488F0-F441-4620-AE22-0833E3B68ED9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{92E1CFF2-33A6-4716-8A0B-B194CD113413}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{92E1CFF2-33A6-4716-8A0B-B194CD113413}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{92E1CFF2-33A6-4716-8A0B-B194CD113413}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{92E1CFF2-33A6-4716-8A0B-B194CD113413}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66D7F5A3-55F5-0E6F-F5F0-E8AB6E479F04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66D7F5A3-55F5-0E6F-F5F0-E8AB6E479F04}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66D7F5A3-55F5-0E6F-F5F0-E8AB6E479F04}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66D7F5A3-55F5-0E6F-F5F0-E8AB6E479F04}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A9CBCF5A-A3C5-45F9-AC61-B0514EB9CA16}
 	EndGlobalSection
 EndGlobal

@@ -12,6 +12,9 @@ namespace Creams_Macro_Protocol
 
         public static void VolumeLookupInnit()
         {
+
+            
+            VolumeLookup.Clear();
             for (int i = 0; i < 101; i++) {
                 VolumeLookup.Add($"{i}", i / 100f);
                

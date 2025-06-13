@@ -92,11 +92,13 @@ namespace Creams_Macro_Protocol
                         sender = SerialObj;
                         SerialObj.Write(Defaults.HandshakeRequest);
                         Thread.Sleep(300);
-                        if (Datahandeling.Handshooke) { 
+                        if (Datahandeling.Handshooke)
+                        {
                             Logger.Info($"Macropad Found on COM port: [{SerialObj.PortName}]");
 
-                            ProcessUpdateThread.StartUpdate(); }
-
+                            ProcessUpdateThread.StartUpdate();
+                        }
+                        
 
 
 
@@ -107,6 +109,13 @@ namespace Creams_Macro_Protocol
                     }
 
                 }
+
+
+                
+
+
+
+
                 //return null;
 
             }
@@ -115,8 +124,11 @@ namespace Creams_Macro_Protocol
 
 
 
-
-
+            if (PosibleComports.Count == 0)
+            {
+                Logger.Warn("no macropad detected closing program");
+                throw new Exception("no macropad");
+            }
 
 
 
