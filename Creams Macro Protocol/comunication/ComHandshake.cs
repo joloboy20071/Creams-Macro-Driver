@@ -96,7 +96,7 @@ namespace Creams_Macro_Protocol
                         {
                             Logger.Info($"Macropad Found on COM port: [{SerialObj.PortName}]");
 
-                            ProcessUpdateThread.StartUpdate();
+                            Task.Factory.StartNew(()=> { ProcessUpdateThread.StartUpdate(); });
                         }
                         
 

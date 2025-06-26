@@ -26,6 +26,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
+		FileExplorer = |firmwareMacropad\
 		SolutionGuid = {A9CBCF5A-A3C5-45F9-AC61-B0514EB9CA16}
 	EndGlobalSection
 EndGlobal

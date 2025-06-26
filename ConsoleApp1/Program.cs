@@ -50,6 +50,7 @@ namespace CreamsMacroRuntime
 
         public static void stop()
         {
+            
             programList [0].Dispose();
             programList.Clear();
 
@@ -73,8 +74,8 @@ namespace CreamsMacroRuntime
             startdriver();
             NotifyIcon icon = NotifyIcon.Create(@"./creamsico.ico", new List<MenuItem>()
             {
-                new MenuItem("restart"){Click = (s,e) => {Restart(); }  },
-                new MenuItem("restart with console"){Click = (s,e) => {ConsoleRestart(); } },
+               // new MenuItem("restart"){Click = (s,e) => {Restart(); }  },
+                //new MenuItem("restart with console"){Click = (s,e) => {ConsoleRestart(); } },
 
 
                 new MenuItem("Quit")

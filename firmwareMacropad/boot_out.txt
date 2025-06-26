@@ -1,0 +1,5 @@
+Adafruit CircuitPython 9.2.8 on 2025-05-28; Waveshare RP2040-Plus (16MB) with rp2040
+Board ID:waveshare_rp2040_plus_16mb
+UID:DE6270431F591227
+boot.py output:
+disabling drive
