@@ -53,7 +53,25 @@ namespace Creams_Macro_Protocol
                 }
             }
 
+
+
+            if (Confighandeler.settings.COMPORT == null)
+
+            {
+                for (int i = 0; i < PosableCompatibleports.Count; i++) { Logger.Debug(PosableCompatibleports[i]); }
+                
+                return PosableCompatibleports;
+            }
+
+            if (Confighandeler.settings.COMPORT != null) {
+                Logger.Debug($"comport is not null but has value off {Confighandeler.settings.COMPORT}");
+                PosableCompatibleports.Clear();
+                PosableCompatibleports.Add(Confighandeler.settings.COMPORT);
+               
+            
+             }
             return PosableCompatibleports;
+
 
         }
 
@@ -63,6 +81,8 @@ namespace Creams_Macro_Protocol
             List<string> PosibleComports = ports();
 
 
+            foreach(string comport in PosibleComports) { Logger.Debug(comport); }
+            if (!(PosibleComports.Count > 0)) { Logger.Debug("posible ports not bigger than 0?"); }
 
             if (PosibleComports.Count > 0)
             {
@@ -91,6 +111,7 @@ namespace Creams_Macro_Protocol
                         if (!SerialObj.IsOpen) { SerialObj.Open(); } //checking if serialport is already open and if not opening it
                         sender = SerialObj;
                         SerialObj.Write(Defaults.HandshakeRequest);
+                        Logger.Debug($"handshake requested, {Defaults.HandshakeRequest} waiting");
                         Thread.Sleep(300);
                         if (Datahandeling.Handshooke)
                         {
@@ -98,8 +119,8 @@ namespace Creams_Macro_Protocol
 
                             Task.Factory.StartNew(()=> { ProcessUpdateThread.StartUpdate(); });
                         }
-                        
 
+                        Logger.Debug($"handshooke:{Datahandeling.Handshooke}");
 
 
                     }

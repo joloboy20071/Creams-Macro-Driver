@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.IO;
 
 namespace Creams_Macro_Protocol
@@ -54,7 +55,8 @@ namespace Creams_Macro_Protocol
             }
         }
 
-        public static void Debug(string text) { AppendToFile($"[Debug]: {text}\n"); }
+        public static void Debug(string text) {
+            if (Confighandeler.settings.debug) { AppendToFile($"[Debug]: {text}\n"); } }
         
         public static void Info(string text) { AppendToFile($"[Info]: {text}\n"); }
 

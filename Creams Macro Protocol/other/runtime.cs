@@ -62,9 +62,9 @@ public class runtime
         
         ComHandshake.GetCompatibleDevice();
 
-        //Logger.Info("staring audio update cycle ");
+        Logger.Info("staring audio update cycle ");
 
-        ProcessUpdateThread.StartUpdate();
+       // ProcessUpdateThread.StartUpdate();
 
 
        

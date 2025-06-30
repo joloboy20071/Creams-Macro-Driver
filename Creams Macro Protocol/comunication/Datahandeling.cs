@@ -34,7 +34,9 @@ namespace Creams_Macro_Protocol
 
         private static void volumeCommandHandeler(CommandType command)
         {
+            if (audio.counterI == 0) { Logger.Debug("first time volume handeler"); }
 
+            if (audio.counterI == 50) { Logger.Debug("audio counter hit 50"); }
             // Debug.WriteLine($"pot:{command.commanddata[0]}, Volume:{command.commanddata[1]}");
             audio.counterI += 1;
             Task.Run(() =>
@@ -54,7 +56,7 @@ namespace Creams_Macro_Protocol
                         }
                         return;
                     }
-                    catch { return; }
+                    catch{ Logger.Error("volume task returning bc error"); return; }
 
                     
 
@@ -80,7 +82,7 @@ namespace Creams_Macro_Protocol
             string indata = sp.ReadExisting();
 
 
-            if (!Handshooke) { Thread.Sleep(300); } //Console.WriteLine(indata); }
+            if (!Handshooke) { Logger.Debug("sleepy sleepy time"); Thread.Sleep(300); } //Console.WriteLine(indata); }
 
             // Console.WriteLine(indata);
             CommandType posibleCommand = new CommandType(indata);
