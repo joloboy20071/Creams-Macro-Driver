@@ -38,6 +38,8 @@ namespace Creams_Macro_Protocol
         private static List<string> ports()
         {
 
+
+
             List<Win32DeviceMgmt.DeviceInfo> allports = Win32DeviceMgmt.GetAllCOMPorts();
 
             List<string> PosableCompatibleports = new List<string>();
@@ -78,10 +80,21 @@ namespace Creams_Macro_Protocol
         public static void GetCompatibleDevice()
         {
             audio.VolumeLookupInnit();
-            List<string> PosibleComports = ports();
+            List<string> PosibleComports = new List<string> { Confighandeler.settings.COMPORT };
+
+            if (Confighandeler.settings.COMPORT == null)
+            {
+                PosibleComports.Clear();
+                List<string> p = ports();
+                for (int i = 0; i < p.Count;i++ )
+                    PosibleComports.Add(p[i]);
+            }
+           
 
 
-            foreach(string comport in PosibleComports) { Logger.Debug(comport); }
+
+
+                foreach (string comport in PosibleComports) { Logger.Debug(comport); }
             if (!(PosibleComports.Count > 0)) { Logger.Debug("posible ports not bigger than 0?"); }
 
             if (PosibleComports.Count > 0)
